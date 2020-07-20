@@ -8,6 +8,7 @@ document.body.append(ccDiv);
 
 // make an unordered list
 const ccList = document.createElement("ul");
+  //could have put this in string below
 
 // add three list items with the words "one, two three" in them
 const listStuff = `
@@ -38,8 +39,8 @@ ccDiv.append(ccImage);
 // with HTML string, make a div, with two paragraphs inside of it
 const sumDiv = `
     <div>
-        <p>1</p>
-        <p>2</p>
+        <p>paragraph 1</p>
+        <p>paragraph 2</p>
     </div>`;
 // put this div before the unordered list from above
 ccList.insertAdjacentHTML("beforebegin", sumDiv);
@@ -48,7 +49,14 @@ console.log(ccDiv.querySelectorAll("p")[1]);
 ccDiv.querySelectorAll("p")[1].classList.add("warning");
 // remove the first paragraph
 ccDiv.querySelector("p").remove();
+
 // create a function called generatePlayerCard that takes in three arguments: name, age, and height
+// have that function return html that looks like this:
+// <div class="playerCard">
+//   <h2>NAME — AGE</h2>
+//   <p>They are HEIGHT and AGE years old. In Dog years this person would be AGEINDOGYEARS. That would be a tall dog!</p>
+// </div>
+
 function generatePlayerCard(name = "1", age = "1", height = "1") {
     const dogAge = 7 * age;
   return `
@@ -58,17 +66,14 @@ function generatePlayerCard(name = "1", age = "1", height = "1") {
         be ${dogAge} years old and a very tall dog!
         </p>
         </br>
-        <button class="rmv">Delete</button>
+        <button class="rmv">&times; Delete</button>
     </div>
     `;
 }
   //const card = generatePlayerCard("Ko", 10, 40);
   //document.body.insertAdjacentHTML("beforeend", card);
-// have that function return html that looks like this:
-// <div class="playerCard">
-//   <h2>NAME — AGE</h2>
-//   <p>They are HEIGHT and AGE years old. In Dog years this person would be AGEINDOGYEARS. That would be a tall dog!</p>
-// </div>
+
+
 
 // make a new div with a class of cards
 const divCard = document.createElement("div");
@@ -92,9 +97,20 @@ ccDiv.insertAdjacentElement('beforebegin', divCard);
 const getBtn = document.querySelectorAll('.rmv');
 console.log(getBtn);
 
-for (let btn = 0; btn < getBtn.length; btn++) {
-    getBtn[btn].addEventListener('click', function() {getBtn[btn].parentNode.remove()});
+/*for (let btn = 0; btn < getBtn.length; btn++) {
+    //function deleteCard() {getBtn[btn].parentNode.remove()}
+    function deleteCard() {getBtn[btn].closest('.playerCard').remove()}
+    getBtn[btn].addEventListener('click', deleteCard);
 }
+*/
 // select all the buttons!
 // make out delete function
+
 // loop over them and attach a listener
+function deleteCard(event) {
+    const clicked = event.currentTarget;
+    console.log(clicked);
+    clicked.closest('.playerCard').remove();
+}
+
+getBtn.forEach(button => button.addEventListener('click', deleteCard));

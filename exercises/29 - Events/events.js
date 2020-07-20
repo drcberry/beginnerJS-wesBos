@@ -30,9 +30,16 @@ function handleBuyButtonClick(event) {
 }
 
 buyButtons.forEach(function(buyButton) {
+  console.log('Binding the buy button...');
   buyButton.addEventListener('click', handleBuyButtonClick);
 });
-
+/*
+buyButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    console.log('I clicked the Button!');
+  });
+})
+*/
 window.addEventListener(
   'click',
   function(event) {
